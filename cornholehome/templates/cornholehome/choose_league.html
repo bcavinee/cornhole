@@ -1,0 +1,40 @@
+{% extends "cornholehome/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+
+	{% block content%}
+
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-4"></div>
+			<div class="col-4">
+				
+				<div class="card" style="width: 30rem;">
+				  <div class="card-body">
+				    <h2 class="card-title text-center bg-success p-1">CHOOSE LEAGUE</h2>
+
+					<form method="POST" id="modify-form">
+						{% csrf_token %}
+						{{ choose_league_form|crispy }}
+						<button class="btn btn-success" type="submit" id="add_button_submit" name="modify_submit">Submit</button>
+					</form>
+<!-- 
+					<form method="POST" id="team-selection">
+	
+					</form> -->
+				<!-- 	<p class='teams-from-league' id="{{team_chocies_league}}"></p> -->
+
+
+				  </div>
+				</div>
+							
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+
+
+	{% endblock content %}

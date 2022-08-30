@@ -1,0 +1,46 @@
+{% extends "cornholehome/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+
+	{% block content%}
+
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-4"></div>
+			<div class="col-4">
+				<h4 class="text-center" id="leaderboard">League Leaderboard</h4>
+					<table class="table table-striped table-hover mt-5">
+					  <thead>
+					    <tr>
+					      <th scope="col">Rank</th>
+					      <th scope="col"></th>
+					      <th scope="col">Team</th>
+					      <th scope="col">Record</th>
+					      <th scope="col">Winning %</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	{% for teaminfo in team_information %}
+						    <tr>
+						      <td>{{ forloop.counter }}</td>
+						      <td><img src="{{ teaminfo.team_image}}" width="40px"></td>
+						      <td>{{teaminfo.teamname}}</td>
+						      <td>{{teaminfo.record}}</td>
+						      <td>{{teaminfo.winning_percentage}}</td>
+						    </tr>
+					    {% endfor %}
+					  </tbody>
+					</table>				
+			</div>
+			<div class="col-4">
+				
+				<a href="{% url 'start_game' %}">LET'S PLAY</a>
+			</div>
+		</div>
+	</div>
+
+
+	{% endblock content %}
