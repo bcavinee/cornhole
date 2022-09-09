@@ -26,7 +26,7 @@
 					  	{% for teaminfo in team_information %}
 						    <tr>
 						      <td>{{ forloop.counter }}</td>
-						      <td><img src="{{ teaminfo.team_image}}" width="40px"></td>
+						      <td><img src="{{ teaminfo.link_to_league.team_image}}" width="40px"></td>
 						      <td>{{teaminfo.league_team}}</td>
 						      <td>{{teaminfo.league_team_record}}</td>
 						      <td>{{teaminfo.winning_percentage_league}}</td>
