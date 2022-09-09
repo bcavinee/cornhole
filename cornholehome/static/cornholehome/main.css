@@ -19,8 +19,8 @@
 
 body{
 
- /*   font-family: 'Comfortaa', cursive;
-*/
+    font-family: 'Comfortaa', cursive;
+
     
 
 }
@@ -357,12 +357,25 @@ body{
 @media screen and (max-width: 600px) {
 
 
-/*    #game-body {
+    #game-body {
 
         font-family: 'Comfortaa';
 
 
-    }   */
+    }   
+
+    #game-over {
+
+        margin-top: 10%;
+        margin bottom: 10%;
+
+    }    
+
+    #team-two-name{
+
+        margin-top: 10%;
+    }
+
 
     #home-page-cornhole-board {
 
