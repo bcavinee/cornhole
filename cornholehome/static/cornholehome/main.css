@@ -14,8 +14,8 @@
     border:  2px solid white;
     color: white;
 
-}
-*/
+}*/
+
 
 body{
 
@@ -357,54 +357,63 @@ body{
 @media screen and (max-width: 600px) {
 
 
+    body{
+
+    font-family: 'Comfortaa';
+
+    
+
+    }
+
     #home-page-cornhole-board {
 
         width: 100px;
     }
 
-#play-game{
 
-    background: #9bda4c;
-    border: none;
-    width: 80px;
-    font-size: 7px;
+    #play-game{
 
-}
+        background: #9bda4c;
+        border: none;
+        width: 80px;
+        font-size: 7px;
 
-#total-win-leaderboard {
+    }
 
-    background: #9bda4c;
-    margin-top: 86px;
-    border: none;
-    white-space: normal !important;
-    word-wrap: break-word;
-    width: 80px;
-    font-size: 7px;
+    #total-win-leaderboard {
 
-}
+        background: #9bda4c;
+        margin-top: 86px;
+        border: none;
+        white-space: normal !important;
+        word-wrap: break-word;
+        width: 80px;
+        font-size: 7px;
 
-#create-league {
+    }
 
-    background: #9bda4c;
-    border: none;
-    width: 80px;
-    font-size: 7px;
+    #create-league {
 
-}
+        background: #9bda4c;
+        border: none;
+        width: 80px;
+        font-size: 7px;
+
+    }
 
 
 
-#league-leaderboard {
+    #league-leaderboard {
 
-    background: #9bda4c;
-    margin-top: 78px;
-    border: none;
-    white-space: normal !important;
-    word-wrap: break-word;
-    width: 80px;
-    font-size: 7px;
+        background: #9bda4c;
+        margin-top: 78px;
+        border: none;
+        white-space: normal !important;
+        word-wrap: break-word;
+        width: 80px;
+        font-size: 7px;
 
-}    
+    }    
 
 
 
