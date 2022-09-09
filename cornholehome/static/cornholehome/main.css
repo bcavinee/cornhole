@@ -1,4 +1,4 @@
-/*[class*="col"] {
+[class*="col"] {
 
     padding: 1rem;
     background-color: teal !important;
@@ -14,7 +14,7 @@
     border:  2px solid white;
     color: white;
 
-}*/
+}
 
 
 body{
