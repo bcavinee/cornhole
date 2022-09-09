@@ -357,13 +357,12 @@ body{
 @media screen and (max-width: 600px) {
 
 
-    body{
+    #game-body {
 
-    font-family: 'Comfortaa';
+        font-family: 'Comfortaa';
 
-    
 
-    }
+    }   
 
     #home-page-cornhole-board {
 
