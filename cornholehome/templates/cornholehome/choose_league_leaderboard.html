@@ -14,13 +14,19 @@
 				
 				<div class="card">
 				  <div class="card-body">
-				    <h2 class="card-title text-center bg-success p-1">Choose Team</h2>
+				    <h2 class="card-title text-center bg-success p-1">CHOOSE LEAGUE</h2>
 
 					<form method="POST" id="modify-form">
 						{% csrf_token %}
-						{{ select_team_form|crispy }}
+						{{ choose_league_leaderboard|crispy }}
 						<button class="btn btn-success" type="submit" id="add_button_submit" name="modify_submit">Submit</button>
 					</form>
+<!-- 
+					<form method="POST" id="team-selection">
+	
+					</form> -->
+				<!-- 	<p class='teams-from-league' id="{{team_chocies_league}}"></p> -->
+
 
 				  </div>
 				</div>

@@ -14,8 +14,8 @@
     border:  2px solid white;
     color: white;
 
-}*/
-
+}
+*/
 
 body{
 
@@ -229,10 +229,48 @@ body{
 
 }
 
+#play-game{
+
+    background: #9bda4c;
+    border: none;
+    width: 100px;
+
+}
+
+#total-win-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 388px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 150px;
+
+}
+
+#create-league {
+
+    background: #9bda4c;
+    border: none;
+    width: 150px;
+
+}
 
 
 
-@keyframes drawArc1 {
+#league-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 388px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 150px;
+
+}
+
+
+/*@keyframes drawArc1 {
     0% { transform: rotate(180deg);}
     100%{ transform: rotate(0deg);  }
 }
@@ -246,12 +284,129 @@ body{
 
 .wrapper {
     width: 300px;    
-    animation: drawArc1 1s linear infinite;
+    animation: drawArc1 1s forwards;
 }
 .inner {    
     border-radius: 1%;
     display: inline-block;
     padding: 30px;    
     background: yellowgreen;
-    animation: drawArc2 3s linear infinite;
+    animation: drawArc2 1s linear forwards;
+}
+*/
+
+
+@media screen and (max-width: 1200px) {
+
+
+    #home-page-cornhole-board {
+
+        width: 250px;
+    }
+
+#play-game{
+
+    background: #9bda4c;
+    border: none;
+    width: 125px;
+    font-size: 13px;
+
+}
+
+#total-win-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 272px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 125px;
+    font-size: 13px;
+
+}
+
+#create-league {
+
+    background: #9bda4c;
+    border: none;
+    width: 125px;
+    font-size: 13px;
+
+}
+
+
+
+#league-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 253px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 125px;
+    font-size: 13px;
+
+}    
+
+
+
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+
+    #home-page-cornhole-board {
+
+        width: 100px;
+    }
+
+#play-game{
+
+    background: #9bda4c;
+    border: none;
+    width: 80px;
+    font-size: 7px;
+
+}
+
+#total-win-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 86px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 80px;
+    font-size: 7px;
+
+}
+
+#create-league {
+
+    background: #9bda4c;
+    border: none;
+    width: 80px;
+    font-size: 7px;
+
+}
+
+
+
+#league-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 78px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 80px;
+    font-size: 7px;
+
+}    
+
+
+
+
 }

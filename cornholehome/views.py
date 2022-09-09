@@ -1,11 +1,26 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import HttpResponse
-from .forms import add_team_form, start_game_form, create_league, choose_league
-from .models import teams, game_team_one, game_team_two, game, league
+from .forms import add_team_form, start_game_form, create_league, choose_league, choose_league_leaderboard_form
+from .models import teams, game_team_one, game_team_two, game, league, league_name_placeholder
 from django.http import JsonResponse
-
+from django.db.models import Q
 
 def home_page(request):
+
+
+
+
+
+
+
+
+
+
+	return render(request,'cornholehome/home_page.html')
+
+
+
+def total_win_leaderboard(request):
 
 	team_information= teams.objects.order_by('-total_win_value')
 
@@ -16,18 +31,9 @@ def home_page(request):
 
 
 
-	return render(request,'cornholehome/home_page.html',{'team_information' : team_information})
+	return render(request,'cornholehome/totalwin.html',{'team_information' : team_information})
 
 
-
-def league_leaderboard(request):
-
-	team_information= teams.objects.order_by('-value_for_order')
-
-
-
-
-	return render(request,'cornholehome/league_leaderboard.html',{'team_information' : team_information})
 
 
 def addteam(request):
@@ -66,9 +72,16 @@ def choose_league_view(request):
 		if choose_league_form.is_valid():
 
 
-			league_name_from_user= choose_league_form.cleaned_data['league_name']
+			league_name_from_user_queryset= choose_league_form.cleaned_data['league_name']
+			league_name_from_user= league_name_from_user_queryset.league_name_for_placeholder
 
 			request.session['league_name_from_user']= league_name_from_user
+
+			league_placeholder_get_all= teams.objects.all()
+			league_placeholder_get_all.update(league_placeholder= league_name_from_user)
+
+			
+
 
 			return redirect("start_game")
 
@@ -79,10 +92,59 @@ def choose_league_view(request):
 	return render(request,'cornholehome/choose_league.html',{'choose_league_form' : choose_league_form})
 
 
+def choose_league_leaderboard_view(request):
+
+	choose_league_leaderboard= choose_league_leaderboard_form()
+
+
+	if request.method == "POST":
+
+		choose_league_leaderboard= choose_league_leaderboard_form(request.POST)
+
+		if choose_league_leaderboard.is_valid():
+
+
+			league_name_from_user_leaderboard= str(choose_league_leaderboard.cleaned_data['league_name'])
+			
+
+			request.session['league_name_from_user']= league_name_from_user_leaderboard
+
+
+			
+
+			return redirect("league_leaderboard")
+
+	else:
+
+		choose_league_leaderboard= choose_league_leaderboard_form()
+
+	return render(request,'cornholehome/choose_league_leaderboard.html',{'choose_league_leaderboard' : choose_league_leaderboard})
+
+
+def league_leaderboard(request):
+
+	league_name_from_user= request.session['league_name_from_user']
+
+	team_information= league.objects.filter(league_name=league_name_from_user).order_by('-value_for_order_league')
+
+
+	# team_information_order= league.objects.order_by('-value_for_order')
+
+	# print(team_information_order)
+
+	return render(request,'cornholehome/league_leaderboard.html',{'team_information' : team_information,'league_name_from_user' : league_name_from_user})
+
+
+
 def start_game(request):
 
-	select_team_form= start_game_form()
+	league_name_from_user= request.session['league_name_from_user']
 
+	request.session['league_name_from_user']= league_name_from_user
+
+	select_team_form= start_game_form()
+	select_team_form.fields['team_one'].queryset= league.objects.filter(league_name=league_name_from_user)
+	select_team_form.fields['team_two'].queryset= league.objects.filter(league_name=league_name_from_user)
 
 	if request.method == "POST":
 
@@ -91,11 +153,14 @@ def start_game(request):
 		if select_team_form.is_valid():
 
 			
-			team_one= select_team_form.cleaned_data['team_one']
-			team_two= select_team_form.cleaned_data['team_two']
+			team_one_name_prestring= str(select_team_form.cleaned_data['team_one'])
+			team_two_name_prestring= str(select_team_form.cleaned_data['team_two'])
 
-			team_one_name= team_one.teamname
-			team_two_name= team_two.teamname
+			team_one= teams.objects.get(teamname=team_one_name_prestring)
+			team_two= teams.objects.get(teamname=team_two_name_prestring)
+
+			team_one_name= team_one_name_prestring
+			team_two_name= team_two_name_prestring
 
 			game_zero= game.objects.filter(game_number="0").exists()
 			
@@ -128,6 +193,8 @@ def start_game(request):
 	else:
 
 		select_team_form= start_game_form()
+		select_team_form.fields['team_one'].queryset= league.objects.filter(league_name=league_name_from_user)
+		select_team_form.fields['team_two'].queryset= league.objects.filter(league_name=league_name_from_user)
 
 
 	return render(request,'cornholehome/start_game.html',{"select_team_form" : select_team_form})
@@ -139,7 +206,7 @@ def play_game(request):
 
 	team_one_name= request.session['team_one']
 	team_two_name= request.session['team_two']
-
+	league_name_from_user= request.session['league_name_from_user']
 	teams_playing= [team_one_name,team_two_name]
 
 	teams_in_league= []
@@ -159,7 +226,7 @@ def play_game(request):
 				teams_in_league.append(value)
 
 
-	print(teams_in_league)
+	
 
 
 	current_game= request.session['current_game']
@@ -258,6 +325,9 @@ def play_game(request):
 
 	if request.method == 'POST':
 
+
+
+
 		if 'teamOneScoreForEndGametest' in request.POST:
 
 			team_one_final_score= int(request.POST['teamOneScoreForEndGametest'])
@@ -282,6 +352,16 @@ def play_game(request):
 				winning_team.record= new_record_winning
 
 
+				
+				league_team_queryset_winner= league.objects.get(Q(league_name=league_name_from_user) & Q(league_team=team_one_name))
+				winning_team_pre_split_league= league_team_queryset_winner.league_team_record
+				win_league,lose_league= winning_team_pre_split_league.split('-')
+				win_int_league= int(win_league)
+				win_plus_league= win_int_league + 1
+				new_win_string_league= str(win_plus_league)
+				new_record_winning_league= f"{new_win_string_league}-{lose_league}"
+				league_team_queryset_winner.league_team_record= new_record_winning_league				
+
 				losing_team= teams.objects.get(teamname=team_two_name)
 				losing_team_pre_split= losing_team.record
 				win,lose= losing_team_pre_split.split('-')
@@ -292,10 +372,21 @@ def play_game(request):
 				losing_team.record= losing_new_record
 
 
+				league_team_queryset_losing= league.objects.get(Q(league_name=league_name_from_user) & Q(league_team=team_two_name))
+				losing_team_pre_split_league= league_team_queryset_losing.league_team_record
+				win_league,lose_league= losing_team_pre_split_league.split('-')
+				lose_int_league= int(lose_league)
+				lose_plus_league= lose_int_league + 1
+				new_lose_string_league= str(lose_plus_league)
+				losing_new_record_league= f"{win_league}-{new_lose_string_league}"
+				league_team_queryset_losing.league_team_record= losing_new_record_league
+
+
 				played_game.save()
 				winning_team.save()
 				losing_team.save()
-
+				league_team_queryset_winner.save()
+				league_team_queryset_losing.save()
 
 
 			elif team_two_final_score >= 21:
@@ -315,6 +406,15 @@ def play_game(request):
 				new_record_winning= f"{new_win_string}-{lose}"
 				winning_team.record= new_record_winning
 
+				league_team_queryset_winner= league.objects.get(Q(league_name=league_name_from_user) & Q(league_team=team_two_name))
+				winning_team_pre_split_league= league_team_queryset_winner.league_team_record
+				win_league,lose_league= winning_team_pre_split_league.split('-')
+				win_int_league= int(win_league)
+				win_plus_league= win_int_league + 1
+				new_win_string_league= str(win_plus_league)
+				new_record_winning_league= f"{new_win_string_league}-{lose_league}"
+				league_team_queryset_winner.league_team_record= new_record_winning_league					
+
 
 				losing_team= teams.objects.get(teamname=team_one_name)
 				losing_team_pre_split= losing_team.record
@@ -323,11 +423,23 @@ def play_game(request):
 				lose_plus= lose_int + 1
 				new_lose_string= str(lose_plus)
 				losing_new_record= f"{win}-{new_lose_string}"
-				losing_team.record= losing_new_record				
+				losing_team.record= losing_new_record
+
+				league_team_queryset_losing= league.objects.get(Q(league_name=league_name_from_user) & Q(league_team=team_one_name))
+				losing_team_pre_split_league= league_team_queryset_losing.league_team_record
+				win_league,lose_league= losing_team_pre_split_league.split('-')
+				lose_int_league= int(lose_league)
+				lose_plus_league= lose_int_league + 1
+				new_lose_string_league= str(lose_plus_league)
+				losing_new_record_league= f"{win_league}-{new_lose_string_league}"
+				league_team_queryset_losing.league_team_record= losing_new_record_league
+
 
 				played_game.save()
 				winning_team.save()
 				losing_team.save()
+				league_team_queryset_winner.save()
+				league_team_queryset_losing.save()
 
 		return redirect('home_page')
 
@@ -358,11 +470,13 @@ def league_view(request):
 			create_team_one= league.objects.create(league_name=league_name, league_team= str(team_one_league), link_to_league=team_one_league_queryset)
 			create_team_two= league.objects.create(league_name=league_name, league_team= str(team_two_league), link_to_league=team_two_league_queryset)
 
+			league_name_for_query= league_name_placeholder.objects.create(league_name_for_placeholder=league_name)
 
 			#use a conditional statement, if team_three for example is not "" (null) elif team 4 not null etc. 
 
 			create_team_one.save()
 			create_team_two.save()
+			league_name_for_query.save()
 
 			return redirect("home_page")
 

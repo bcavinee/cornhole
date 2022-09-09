@@ -19,7 +19,7 @@ class teams(models.Model):
 	value_for_order= models.IntegerField(default= 99)
 	team_image= models.FilePathField(path='media/images/')
 	total_win_value= models.IntegerField(default=99)
-
+	league_placeholder= models.CharField(max_length=200, blank=True)
 
 
 	def save(self, *args, **kwargs):
@@ -95,14 +95,53 @@ class game(models.Model):
 	loser= models.CharField(max_length=200)
 
 
+
+class league_name_placeholder(models.Model):
+	
+	league_name_for_placeholder= models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.league_name_for_placeholder 
+
+
+
 class league(models.Model):
 
 	
 	league_name= models.CharField(max_length=200)
 	league_team= models.CharField(max_length=15)
 	league_team_record= models.CharField(max_length=20, default="0-0")
+	value_for_order_league= models.IntegerField(default= 99)
+	winning_percentage_league= models.DecimalField(max_digits=4, decimal_places=3, default= 0.000)
 	link_to_league= models.ForeignKey(teams, on_delete=models.CASCADE, blank=True, null=True)
+
+	def save(self, *args, **kwargs):
+
+
+		rank_list= self.league_team_record.split("-")
+		rank_subtracted_list= [int(value) + .0 for value in rank_list]
+		self.value_for_order_league= rank_subtracted_list[0] - rank_subtracted_list[1]
+
+
+		if self.league_team_record == "0-0":
+
+
+			self.value_for_order_league= -999999
+		
+		if self.league_team_record != "0-0":
+			total_games_played= rank_subtracted_list[0] + rank_subtracted_list[1]
+			self.winning_percentage_league= round(rank_subtracted_list[0]/total_games_played,3)
+			
+
+	
+
+		super(league,self).save(*args,**kwargs)
+
+
+
+
+
 
 
 	def __str__(self):
-		return self.league_name 
+		return self.league_team 

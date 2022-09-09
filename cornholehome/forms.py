@@ -1,5 +1,5 @@
 from django.forms import ModelForm, widgets
-from cornholehome.models import teams, league
+from cornholehome.models import teams, league, league_name_placeholder
 from django import forms
 
 
@@ -17,21 +17,40 @@ class start_game_form(ModelForm):
 		model= teams
 		fields= ()
 
-	team_one= forms.ModelChoiceField(queryset= teams.objects.all())
-	team_two= forms.ModelChoiceField(queryset= teams.objects.all())
 
 
-class choose_league(forms.Form):
+	# league_name_from_teams= teams.objects.all().first()
 
-	league_name_list= list(league.objects.all().values_list("league_name", flat=True).distinct())
-	league_name_list_dupo= [league_name for league_name in league_name_list]
-	tuple_of_league_names= tuple(zip(league_name_list,league_name_list_dupo))
+		
+	# league_name_teams= league_name_from_teams.league_placeholder
 
-	league_name= forms.ChoiceField(choices= tuple_of_league_names)
+	
+	team_one= forms.ModelChoiceField(queryset= league.objects.all())
+
+	team_two= forms.ModelChoiceField(queryset= league.objects.all())
+
+
+class choose_league(ModelForm):
+
+	class Meta:
+		model= league_name_placeholder
+		fields= ()	
+
+	# league_name_list= list(league.objects.all().values_list("league_name", flat=True).distinct())
+	# league_name_list_dupo= [league_name for league_name in league_name_list]
+	# tuple_of_league_names= tuple(zip(league_name_list,league_name_list_dupo))
+
+	league_name= forms.ModelChoiceField(queryset= league_name_placeholder.objects.all())
 
 
 
+class choose_league_leaderboard_form(ModelForm):
 
+	class Meta:
+		model= league_name_placeholder
+		fields= ()		
+
+	league_name= forms.ModelChoiceField(queryset= league_name_placeholder.objects.all())
 
 class create_league(forms.Form):
 

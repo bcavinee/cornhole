@@ -407,36 +407,6 @@ $(document).on('click','#clickme', function() {
 
 
 
-$(document).on('submit','#lot-selection-form', function(e) {
-
-
-		e.preventDefault();
-		
-
-					
-		
-		$.ajax({
-
-			url: '',
-			type: 'POST',
-			data: {
-				
-				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-				
-			},
-
-			success: function(response) {
-				
-
-
- 				
-
-
-			}			
-
-		})
-	})
-
 
 
 

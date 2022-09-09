@@ -12,6 +12,8 @@ urlpatterns = [
     path('start_game', views.start_game, name='start_game'),
     path('league', views.league_view, name='league'),
     path('choose_league', views.choose_league_view, name='choose_league'),
+    path('choose_league_leaderboard', views.choose_league_leaderboard_view, name='choose_league_leaderboard'),
+    path('totalwin', views.total_win_leaderboard, name='total_win_leaderboard')
   
     
 ]
