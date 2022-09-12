@@ -4,6 +4,7 @@ from .forms import add_team_form, start_game_form, create_league, choose_league,
 from .models import teams, game_team_one, game_team_two, game, league, league_name_placeholder
 from django.http import JsonResponse
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 def home_page(request):
 
@@ -461,14 +462,40 @@ def league_view(request):
 
 		if league_form.is_valid():
 
-			league_name= league_form.cleaned_data['league_name']
-			team_one_league= league_form.cleaned_data['team_one_league']
-			team_one_league_queryset= teams.objects.get(teamname=team_one_league)
-			team_two_league= league_form.cleaned_data['team_two_league']
-			team_two_league_queryset= teams.objects.get(teamname=team_two_league)
+			try:
+
+				league_name= league_form.cleaned_data['league_name']
+				team_one_league= league_form.cleaned_data['team_one_league']
+				team_one_league_queryset= teams.objects.get(teamname=team_one_league)
+				team_two_league= league_form.cleaned_data['team_two_league']
+				team_two_league_queryset= teams.objects.get(teamname=team_two_league)
+				team_three_league= league_form.cleaned_data['team_three_league']
+				team_three_league_queryset= teams.objects.get(teamname=team_three_league)
+				team_four_league= league_form.cleaned_data['team_four_league']
+				team_four_league_queryset= teams.objects.get(teamname=team_four_league)
+				team_five_league= league_form.cleaned_data['team_five_league']
+				team_five_league_queryset= teams.objects.get(teamname=team_five_league)
+
+			except ObjectDoesNotExist:
+				pass
+
+
 
 			create_team_one= league.objects.create(league_name=league_name, league_team= str(team_one_league), link_to_league=team_one_league_queryset)
 			create_team_two= league.objects.create(league_name=league_name, league_team= str(team_two_league), link_to_league=team_two_league_queryset)
+
+			if team_three_league != None:
+				create_team_three= league.objects.create(league_name=league_name, league_team= str(team_three_league), link_to_league=team_three_league_queryset)
+				create_team_three.save()
+
+			if team_four_league != None:
+				create_team_four= league.objects.create(league_name=league_name, league_team= str(team_four_league), link_to_league=team_four_league_queryset)
+				create_team_four.save()
+
+			if team_five_league != None:
+				create_team_five.save()
+				create_team_five= league.objects.create(league_name=league_name, league_team= str(team_five_league), link_to_league=team_five_league_queryset)
+
 
 			league_name_for_query= league_name_placeholder.objects.create(league_name_for_placeholder=league_name)
 
@@ -476,6 +503,7 @@ def league_view(request):
 
 			create_team_one.save()
 			create_team_two.save()
+
 			league_name_for_query.save()
 
 			return redirect("home_page")

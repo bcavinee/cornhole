@@ -61,6 +61,9 @@ class create_league(forms.Form):
 	league_name= forms.CharField()
 	team_one_league= forms.ModelChoiceField(queryset= teams.objects.all())
 	team_two_league= forms.ModelChoiceField(queryset= teams.objects.all())
+	team_three_league= forms.ModelChoiceField(queryset= teams.objects.all(),required=False)
+	team_four_league= forms.ModelChoiceField(queryset= teams.objects.all(),required=False)
+	team_five_league= forms.ModelChoiceField(queryset= teams.objects.all(),required=False)
 
 
 
