@@ -484,19 +484,24 @@ def league_view(request):
 			create_team_one= league.objects.create(league_name=league_name, league_team= str(team_one_league), link_to_league=team_one_league_queryset)
 			create_team_two= league.objects.create(league_name=league_name, league_team= str(team_two_league), link_to_league=team_two_league_queryset)
 
-			if team_three_league != None:
-				create_team_three= league.objects.create(league_name=league_name, league_team= str(team_three_league), link_to_league=team_three_league_queryset)
-				create_team_three.save()
 
-			if team_four_league != None:
-				create_team_four= league.objects.create(league_name=league_name, league_team= str(team_four_league), link_to_league=team_four_league_queryset)
-				create_team_four.save()
+			try:
+				if team_three_league != None:
+					create_team_three= league.objects.create(league_name=league_name, league_team= str(team_three_league), link_to_league=team_three_league_queryset)
+					create_team_three.save()
 
-			if team_five_league != None:
-				create_team_five.save()
-				create_team_five= league.objects.create(league_name=league_name, league_team= str(team_five_league), link_to_league=team_five_league_queryset)
+				if team_four_league != None:
+					create_team_four= league.objects.create(league_name=league_name, league_team= str(team_four_league), link_to_league=team_four_league_queryset)
+					create_team_four.save()
 
+				if team_five_league != None:
+					create_team_five.save()
+					create_team_five= league.objects.create(league_name=league_name, league_team= str(team_five_league), link_to_league=team_five_league_queryset)
 
+			except UnboundLocalError:
+				pass
+
+				
 			league_name_for_query= league_name_placeholder.objects.create(league_name_for_placeholder=league_name)
 
 			#use a conditional statement, if team_three for example is not "" (null) elif team 4 not null etc. 
