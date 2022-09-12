@@ -1,0 +1,427 @@
+/*[class*="col"] {
+
+    padding: 1rem;
+    background-color: teal !important;
+    border:  2px solid white;
+    color: white;
+
+}
+
+[class*="row"] {
+
+    padding: 1rem;
+    background-color: orange !important;
+    border:  2px solid white;
+    color: white;
+
+}
+*/
+
+body{
+
+    font-family: 'Assistant', sans-serif;
+    
+
+}
+
+
+#game-body {
+
+    background: url("image/turf.8a2f2a1eb9ea.jpg");
+    background-repeat: repeat;
+    height: 100vh;
+
+
+}
+
+
+
+#navigation-bar {
+
+    background: rgb(155,218,76);
+    background: linear-gradient(180deg, rgba(155,218,76,1) 50%, rgba(118,189,56,1) 100%);
+}
+
+.table {
+	outline-style: solid;
+	outline-width: 1px;
+}
+
+.asteriskField {
+    display: none;
+}
+
+#leaderboard {
+
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+
+
+/*#main-container{
+
+    background: rgb(231,229,229);
+    background: linear-gradient(180deg, rgba(231,229,229,1) 0%, rgba(231,229,229,0.4458158263305322) 100%);
+    border-radius: 8px;
+
+
+}*/
+
+
+
+.img-container-one{
+    width:150px;
+    height:225px;
+    position: relative;
+    display: inline-block;
+    margin: 10px 5px 5px;
+}
+
+.img-text-one{
+    top:35%;
+    left: 100%;
+    margin-left: 10px;
+    margin-top: -25px;
+    position: absolute;
+    display:block;
+    font-size: 70px;
+    width:150px;
+    height:50px;
+}
+
+
+
+.img-container-two{
+    width:150px;
+    height:225px;
+    position: relative;
+    display: inline-block;
+    margin: 10px 5px 5px;
+}
+.img-text-two{
+    top:35%;
+    left: 100%;
+    margin-left: 10px;
+    margin-top: -25px;
+    position: absolute;
+    display:block;
+    font-size: 70px;
+    width:150px;
+    height:50px;
+}
+
+.button-div {
+
+
+    margin-top: 245px;
+    margin-left: 30px;
+
+}
+
+#team-two-add-point {
+
+
+    line-height: 50px;
+    width: 60px;
+    background-color: #00a8f3;
+    border-radius: 6px;
+    font-size: 50px; 
+    margin-left: 2px;
+
+}
+
+#team-two-subtract-point {
+
+
+    line-height: 50px;
+    width: 60px;
+    background-color: #00a8f3;
+    border-radius: 6px;
+    font-size: 50px; 
+
+
+}
+
+
+
+.minus-text {
+
+    position: relative;
+    bottom: 5px;
+
+}
+
+#team-two-cornhole {
+
+
+
+    background-color: #00a8f3;
+    border-radius: 6px;
+    font-size: 34px; 
+
+
+}
+
+#team-one-add-point {
+
+
+    line-height: 50px;
+    width: 60px;
+    background-color: #ec1c24;
+    border-radius: 6px;
+    font-size: 50px; 
+    margin-left: 1px;
+
+}
+
+#team-one-subtract-point {
+
+
+    line-height: 50px;
+    width: 60px;
+    background-color: #ec1c24;
+    border-radius: 6px;
+    font-size: 50px; 
+
+
+}
+
+#team-one-cornhole {
+
+
+
+    background-color: #ec1c24;
+    border-radius: 6px;
+    font-size: 34px; 
+
+
+}
+
+
+#team-one-name {
+
+    background-color: grey;
+    width: 335px;
+    margin-left: 38px;
+    
+    
+}
+
+#team-two-name {
+
+    background-color: grey;
+    width: 335px;
+    margin-left: 38px;
+        
+}
+
+
+#game-over {
+
+    font-family: 'Assistant', sans-serif;
+    margin-top: 50%;
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+
+
+}
+
+#play-game{
+
+    background: #9bda4c;
+    border: none;
+    width: 100px;
+
+}
+
+#total-win-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 388px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 150px;
+
+}
+
+#create-league {
+
+    background: #9bda4c;
+    border: none;
+    width: 150px;
+
+}
+
+
+
+#league-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 388px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 150px;
+
+}
+
+
+/*@keyframes drawArc1 {
+    0% { transform: rotate(180deg);}
+    100%{ transform: rotate(0deg);  }
+}
+
+@keyframes drawArc2 {
+    0% { transform: rotate(-180deg); }
+    100%{ transform: rotate(0deg); }
+}
+
+
+
+.wrapper {
+    width: 300px;    
+    animation: drawArc1 1s forwards;
+}
+.inner {    
+    border-radius: 1%;
+    display: inline-block;
+    padding: 30px;    
+    background: yellowgreen;
+    animation: drawArc2 1s linear forwards;
+}
+*/
+
+
+@media screen and (max-width: 1200px) {
+
+
+    #home-page-cornhole-board {
+
+        width: 250px;
+    }
+
+#play-game{
+
+    background: #9bda4c;
+    border: none;
+    width: 125px;
+    font-size: 13px;
+
+}
+
+#total-win-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 272px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 125px;
+    font-size: 13px;
+
+}
+
+#create-league {
+
+    background: #9bda4c;
+    border: none;
+    width: 125px;
+    font-size: 13px;
+
+}
+
+
+
+#league-leaderboard {
+
+    background: #9bda4c;
+    margin-top: 253px;
+    border: none;
+    white-space: normal !important;
+    word-wrap: break-word;
+    width: 125px;
+    font-size: 13px;
+
+}    
+
+
+
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+
+  
+
+    #game-over {
+
+        margin-top: 10%;
+        margin bottom: 10%;
+
+    }    
+
+    #team-two-name{
+
+        margin-top: 10%;
+    }
+
+
+    #home-page-cornhole-board {
+
+        width: 100px;
+    }
+
+
+    #play-game{
+
+        background: #9bda4c;
+        border: none;
+        width: 80px;
+        font-size: 7px;
+
+    }
+
+    #total-win-leaderboard {
+
+        background: #9bda4c;
+        margin-top: 86px;
+        border: none;
+        white-space: normal !important;
+        word-wrap: break-word;
+        width: 80px;
+        font-size: 7px;
+
+    }
+
+    #create-league {
+
+        background: #9bda4c;
+        border: none;
+        width: 80px;
+        font-size: 7px;
+
+    }
+
+
+
+    #league-leaderboard {
+
+        background: #9bda4c;
+        margin-top: 78px;
+        border: none;
+        white-space: normal !important;
+        word-wrap: break-word;
+        width: 80px;
+        font-size: 7px;
+
+    }    
+
+
+
+
+}
